@@ -1,7 +1,9 @@
 #initial workflow
 name: SecOps sync detection rules
-on: 
-   workflow_call:
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
   runs-on: ubuntu-latest
   steps:
