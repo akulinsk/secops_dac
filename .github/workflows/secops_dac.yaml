@@ -1,3 +1,4 @@
+#initial workflow
 name: SecOps sync detection rules
 on: 
    workflow_call:
