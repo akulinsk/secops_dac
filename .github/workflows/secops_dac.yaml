@@ -1,0 +1,7 @@
+name: SecOps sync detection rules
+on: 
+   workflow_call:
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo "Starting rule sync from SecOps instance..."
