@@ -5,6 +5,7 @@ on:
     branches:
       - main
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo "Starting rule sync from SecOps instance..."
+  pull-existing-detections:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Starting rule sync from SecOps instance..."
