@@ -42,6 +42,7 @@ jobs:
         run: pip install -r requirements_dev.txt
 
       - name: Check Python code formatting with black
+        working-directory: ./tools/rule_manager
         run: python -m black chronicle_api rule_cli --line-length 120 --check
 
       - name: Run tests using pytest
