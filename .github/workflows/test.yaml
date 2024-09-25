@@ -1,9 +1,11 @@
-on: workflow_dispatch
-inputs:
-  environment:
-    type: environment
-    description: Select the environmen
-    default: default
+name: Test workflow
+on:
+  workflow_dispatch:
+    inputs:
+     environment:
+        type: environment
+        description: Select the environmen
+        default: default
 
 env:
   DAY_OF_WEEK: Monday
