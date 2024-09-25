@@ -45,7 +45,7 @@ jobs:
       - run: git clone "https://github.com/${{ github.repository }}" $CI_COMMIT_SHA
         # Go to the new directory.
       - run: cd "${CI_COMMIT_SHA}"
-      - run: git branch
+      - run: pwd && ls -la && git branch
       - run: pip install -r requirements_dev.txt
         # Set the username and email to be associated with commits.
         #git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
