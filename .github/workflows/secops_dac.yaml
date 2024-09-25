@@ -51,7 +51,7 @@ jobs:
         #git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
         # Pull the latest version of all rules from Chronicle
       - run: echo "Attempting to pull the latest version of all rules from Chronicle"
-      - run: python -m rule_cli --pull-latest-rules
+      - run: cd "${CI_COMMIT_SHA}" && python -m rule_cli --pull-latest-rules
         # Add files to git staging area
         #git add rules rule_config.yaml
         # Check if there are any rule updates that need to be committed to the repo's main branch.
