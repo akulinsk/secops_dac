@@ -39,6 +39,7 @@ jobs:
         # Run tests
       #- run: pytest -v
         # Clone the repository via HTTPS inside a new directory. The new directory is named using the CI_COMMIT_SHA variable (the commit revision the project is built for).
+      - run: echo "Clonning repository ${GITHUB_REPOSITORY}"
       - run: git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
         # Go to the new directory.
       - run: cd "${CI_COMMIT_SHA}"
