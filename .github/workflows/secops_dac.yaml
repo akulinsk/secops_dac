@@ -35,31 +35,30 @@ jobs:
       - run: apt-get update -qy && apt-get upgrade -qy
       - run: apt-get install -y git
       - run: git --version
-      - run: |
-        which python
-        pwd
-        git branch
+      - run: which python
+      - run: pwd
+      - run: git branch
         # Run tests
-        pytest -v
+      - run: pytest -v
         # Clone the repository via HTTPS inside a new directory. The new directory is named using the CI_COMMIT_SHA variable (the commit revision the project is built for).
-        git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
+      - run: git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
         # Go to the new directory.
-        cd "${CI_COMMIT_SHA}"
+      - run: cd "${CI_COMMIT_SHA}"
         # Set the username and email to be associated with commits.
         #git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
         #git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
         # Pull the latest version of all rules from Chronicle
-        echo "Attempting to pull the latest version of all rules from Chronicle"
+      - run: echo "Attempting to pull the latest version of all rules from Chronicle"
         #python -m rule_cli --pull-latest-rules
         # Add files to git staging area
         #git add rules rule_config.yaml
         # Check if there are any rule updates that need to be committed to the repo's main branch.
-        echo "Checking for updates to rules."
+      - run: echo "Checking for updates to rules."
         #git status
         # Get a count of changes.
         #CHANGES=$(git status --porcelain | wc -l)
         # Commit and push changes if there are any. Skip the CI pipeline (ci.skip).
-        echo "There are $CHANGES changes to commit" && [ "$CHANGES" -gt "0" ] && git commit -m "latest rules pulled from chronicle api" && git push origin "${CI_DEFAULT_BRANCH}" -o ci.skip
-        echo "Current time is $(date)"
+      - run: echo "There are $CHANGES changes to commit" && [ "$CHANGES" -gt "0" ] && git commit -m "latest rules pulled from chronicle api" && git push origin "${CI_DEFAULT_BRANCH}" -o ci.skip
+      - run: echo "Current time is $(date)"
         # Show last commit message.
-        git log -1
+      - run: git log -1
