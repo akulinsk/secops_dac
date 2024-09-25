@@ -8,7 +8,6 @@ on:
         default: default
 
 env:
-  KAKA: ${{ vars.CI_COMMIT_SHA }}
   DAY_OF_WEEK: Monday
 
 jobs:
@@ -20,4 +19,4 @@ jobs:
       - run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
       - run: echo "This is var $KAKA"
         env:
-          First_Name: Mona
+          KAKA: ${{ vars.CI_COMMIT_SHA }}
