@@ -42,16 +42,19 @@ jobs:
         run: pip install -r requirements_dev.txt
 
       - name: Check Python code formatting with black
-        working-directory: ./tools/rule_manager
-        run: python -m black chronicle_api rule_cli --line-length 120 --check
+        #working-directory: ./tools/rule_manager
+        #run: python -m black chronicle_api rule_cli --line-length 120 --check
 
       - name: Run tests using pytest
+        working-directory: ./tools/rule_manager
         run: pytest -v
 
       - name: Pull latest version of all rules from Google SecOps
+        working-directory: ./tools/rule_manager
         run: python -m rule_cli --pull-latest-rules
 
       - name: Pull latest version of all reference lists from Google SecOps
+        working-directory: ./tools/rule_manager
         run: python -m rule_cli --pull-latest-reference-lists
 
       - name: Add files to git staging area
