@@ -5,9 +5,13 @@ on:
 jobs:
   pull-existing-detections:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     container: 
       image: python:3.10-slim
     steps:
+
       - run: echo "Starting rule sync from SecOps instance..."
       - run: echo "Setting up Python environment."
       - run: pip install --upgrade pip
