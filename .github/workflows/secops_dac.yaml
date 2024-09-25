@@ -2,6 +2,11 @@
 name: SecOps sync detection rules
 on:
   workflow_dispatch:
+    inputs:
+     environment:
+        type: environment
+        description: Select the environmen
+        default: default
 jobs:
   pull-existing-detections:
     runs-on: ubuntu-latest
