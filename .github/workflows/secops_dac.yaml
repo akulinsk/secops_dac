@@ -36,13 +36,13 @@ jobs:
       - run: apt-get install -y git
       - run: git --version
       - run: which python
-      - run: git branch
         # Run tests
       - run: pytest -v
         # Clone the repository via HTTPS inside a new directory. The new directory is named using the CI_COMMIT_SHA variable (the commit revision the project is built for).
       - run: git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
         # Go to the new directory.
       - run: cd "${CI_COMMIT_SHA}"
+      - run: git branch
       - run: pip install -r requirements_dev.txt
         # Set the username and email to be associated with commits.
         #git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
