@@ -15,8 +15,6 @@ jobs:
         shell: bash
     container: 
       image: python:3.10-slim
-    env:
-      CI_COMMIT_SHA: ${{env.GITHUB_REPOSITORY}}
     steps:
       - run: apt-get update && apt-get -y install sudo
       #changing ownership of python cache
@@ -41,7 +39,7 @@ jobs:
         # Run tests
       #- run: pytest -v
         # Clone the repository via HTTPS inside a new directory. The new directory is named using the CI_COMMIT_SHA variable (the commit revision the project is built for).
-      - run: echo 'Clonning repository ${GITHUB_REPOSITORY}'
+      - run: echo 'Clonning repository ${{ env.GITHUB_REPOSITORY }} into ${{ env.CI_COMMIT_SHA }}'
       - run: git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
         # Go to the new directory.
       - run: cd "${CI_COMMIT_SHA}"
