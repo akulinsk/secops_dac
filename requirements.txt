@@ -1,5 +1,6 @@
 google-auth
 requests
+black
 python-dotenv
 PyYAML
 ruamel.yaml
