@@ -11,6 +11,7 @@ jobs:
     container: 
       image: python:3.10-slim
     steps:
+      - run: apt-get update && apt-get -y install sudo
       #changing ownership of python cache
       - run: sudo chown -R $(whoami) /github/home
       - run: echo "Starting rule sync from SecOps instance..."
