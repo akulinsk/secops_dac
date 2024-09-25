@@ -58,9 +58,11 @@ jobs:
         run: python -m rule_cli --pull-latest-reference-lists
 
       - name: Add files to git staging area
+        working-directory: ./tools/rule_manager
         run: git add rules rule_config.yaml reference_lists reference_list_config.yaml
 
       - name: Run git status command
+        working-directory: ./tools/rule_manager
         run: git status  # For debugging
 
       - name: Set the username and email to be associated with git commits
