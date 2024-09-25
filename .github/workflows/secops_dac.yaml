@@ -29,7 +29,6 @@ jobs:
       - run: python --version ; pip --version
       # Install project requirements.
       - run: pwd
-      - run: pip install -r ./${GITHUB_REPOSITORY}/requirements_dev.txt
 
       # Setting up git environment.
       - run: echo "Installing git."
@@ -44,6 +43,7 @@ jobs:
       - run: git clone "https://github.com/${GITHUB_REPOSITORY}" "${CI_COMMIT_SHA}"
         # Go to the new directory.
       - run: cd "${CI_COMMIT_SHA}"
+      - run: pip install -r requirements_dev.txt
         # Set the username and email to be associated with commits.
         #git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
         #git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
