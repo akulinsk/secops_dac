@@ -7,5 +7,22 @@ on:
 jobs:
   pull-existing-detections:
     runs-on: ubuntu-latest
+    container: 
+      image: python:3.10-slim
     steps:
       - run: echo "Starting rule sync from SecOps instance..."
+      - run echo "Setting up Python environment."
+      - run pip install --upgrade pip
+      - run pip install virtualenv
+      - run python -m virtualenv venv
+      - run source venv/bin/activate
+      - run which python  # Check that the virtual environment is activated.
+      - run python --version ; pip --version
+      # Install project requirements.
+      - run pip install -r requirements_dev.txt
+
+      # Setting up git environment.
+      - run echo "Installing git."
+      - run apt-get update -qy && apt-get upgrade -qy
+      - run apt-get install -y git
+      - run git --version
