@@ -28,6 +28,7 @@ jobs:
       - run: which python  # Check that the virtual environment is activated.
       - run: python --version ; pip --version
       # Install project requirements.
+      - run: pwd
       - run: pip install -r requirements_dev.txt
 
       # Setting up git environment.
@@ -36,7 +37,6 @@ jobs:
       - run: apt-get install -y git
       - run: git --version
       - run: which python
-      - run: pwd
       - run: git branch
         # Run tests
       - run: pytest -v
