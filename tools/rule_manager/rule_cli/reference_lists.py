@@ -34,8 +34,9 @@ import yaml
 LOGGER = logging.getLogger()
 
 ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
+CONFIG_DIR = ROOT_DIR / "config"
 REF_LISTS_DIR = ROOT_DIR / "reference_lists"
-REF_LIST_CONFIG_FILE = ROOT_DIR / "reference_list_config.yaml"
+REF_LIST_CONFIG_FILE = CONFIG_DIR / "reference_list_config.yaml"
 REF_LIST_SYNTAX_TYPES = Literal[  # pylint: disable="invalid-name"
     "REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED",
     "REFERENCE_LIST_SYNTAX_TYPE_PLAIN_TEXT_STRING",

@@ -39,6 +39,7 @@ jobs:
           cache: "pip"  # Caching pip dependencies
 
       - name: Install Python project dependencies
+        working-directory: ./tools/rule_manager
         run: pip install -r requirements_dev.txt
 
       #- name: Check Python code formatting with black
