@@ -19,8 +19,11 @@ permissions:
 
 jobs:
   pull-latest-content:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    
     runs-on: ubuntu-latest
-
     env:
       LOGGING_LEVEL: ${{ vars.LOGGING_LEVEL }}
       CHRONICLE_API_BASE_URL: ${{ vars.CHRONICLE_API_BASE_URL }}
