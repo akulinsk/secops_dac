@@ -36,7 +36,7 @@ from rule_cli.rules import Rules
 
 LOGGER = logging.getLogger()
 
- """Quick and dirty hack to move rules and lists files to the root of repo level."""
+"""Quick and dirty hack to move rules and lists files to the root of repo level."""
 ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
 RULES_DIR = ROOT_DIR / "rules"
 REF_LISTS_DIR = ROOT_DIR / "reference_lists"
