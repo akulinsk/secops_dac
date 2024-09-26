@@ -59,7 +59,7 @@ jobs:
         run: python -m rule_cli --pull-latest-reference-lists
 
       - name: Add files to git staging area
-        run: git add rules rule_config.yaml reference_lists reference_list_config.yaml
+        run: git add rules config/rule_config.yaml reference_lists config/reference_list_config.yaml
 
       - name: Run git status command
         run: git status  # For debugging
