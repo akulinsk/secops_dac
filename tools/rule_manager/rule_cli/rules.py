@@ -40,7 +40,7 @@ import yaml
 
 LOGGER = logging.getLogger()
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent
+ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
 RULES_DIR = ROOT_DIR / "rules"
 RULE_CONFIG_FILE = ROOT_DIR / "rule_config.yaml"
 
