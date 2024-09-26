@@ -41,8 +41,9 @@ import yaml
 LOGGER = logging.getLogger()
 
 ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
+CONFIG_DIR = ROOT_DIR / "config"
 RULES_DIR = ROOT_DIR / "rules"
-RULE_CONFIG_FILE = ROOT_DIR / "rule_config.yaml"
+RULE_CONFIG_FILE = CONFIG_DIR / "rule_config.yaml"
 
 # Use ruamel.yaml to raise an exception if a YAML file contains duplicate keys
 # (i.e. duplicate rule names)
