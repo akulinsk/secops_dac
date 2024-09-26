@@ -29,6 +29,7 @@ from typing import List
 
 from google.auth.transport import requests
 from google.oauth2 import service_account
+from google.auth.identity_pool import Credentials
 
 AUTHORIZATION_SCOPES = ["https://www.googleapis.com/auth/cloud-platform"]
 
@@ -48,8 +49,10 @@ def initialize_http_session(
   Returns:
       HTTP session object to send authorized requests and receive responses.
   """
+  """
   credentials = service_account.Credentials.from_service_account_info(
       info=chronicle_api_credentials, scopes=scopes or AUTHORIZATION_SCOPES
   )
-
+  """
+  credentials = Credentials.from_info({})
   return requests.AuthorizedSession(credentials)
