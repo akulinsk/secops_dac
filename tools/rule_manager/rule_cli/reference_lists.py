@@ -33,7 +33,7 @@ import yaml
 
 LOGGER = logging.getLogger()
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent
+ROOT_DIR = pathlib.Path(__file__).parent.parent.parent
 REF_LISTS_DIR = ROOT_DIR / "reference_lists"
 REF_LIST_CONFIG_FILE = ROOT_DIR / "reference_list_config.yaml"
 REF_LIST_SYNTAX_TYPES = Literal[  # pylint: disable="invalid-name"
