@@ -32,7 +32,7 @@ from rule_cli.rules import Rule
 from rule_cli.rules import RuleConfigEntry
 from rule_cli.rules import Rules
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent
+ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
 RULES_DIR = ROOT_DIR / "rules"
 TEST_DATA_DIR = pathlib.Path(__file__).parent / "test_data"
 TEST_RULES_DIR = TEST_DATA_DIR / "rules"
