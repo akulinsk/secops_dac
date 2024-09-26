@@ -1,0 +1,14 @@
+gcloud iam workload-identity-pools providers create-oidc "secops-dac-provider" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --workload-identity-pool="secops-dac-pool" \
+  --display-name="Secops dac provider" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository" \
+  --issuer-uri="https://token.actions.githubusercontent.com" \
+  --attribute-condition="assertion.repository_owner=='OWNER' && assertion.ref=='refs/heads/main'"
+Created workload identity pool provider [secops-dac-provider].
+
+gcloud iam service-accounts add-iam-policy-binding "[SA_NAME]@[PROJECT_ID].iam.gserviceaccount.com" \
+  --project="${PROJECT_ID}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/[ID]/locations/global/workloadIdentityPools/secops-dac-pool/attribute.repository/[REPO_OWNER]/secops_dac"
