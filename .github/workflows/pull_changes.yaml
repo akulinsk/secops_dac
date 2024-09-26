@@ -57,7 +57,7 @@ jobs:
       #  uses: google-github-actions/setup-gcloud@v2 
         
       - name: Testing Workload Identity Federation Config
-        run: gcloud projects list
+        run: echo 'Bearer ${{ steps.auth.outputs.access_token }}'
           
       - name: Run tests using pytest
         working-directory: ./tools/rule_manager
