@@ -29,12 +29,13 @@ from google.auth.transport import requests
 import pydantic
 import ruamel.yaml
 from rule_cli.common.custom_exceptions import ReferenceListConfigError
+from rule_cli.common.pathconfig import ROOT_DIR, CONFIG_DIR
+
 import yaml
 
 LOGGER = logging.getLogger()
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
-CONFIG_DIR = ROOT_DIR / "config"
+
 REF_LISTS_DIR = ROOT_DIR / "reference_lists"
 REF_LIST_CONFIG_FILE = CONFIG_DIR / "reference_list_config.yaml"
 REF_LIST_SYNTAX_TYPES = Literal[  # pylint: disable="invalid-name"

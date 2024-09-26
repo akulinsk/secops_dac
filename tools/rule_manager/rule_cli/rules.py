@@ -36,12 +36,11 @@ from rule_cli.common.custom_exceptions import DuplicateRuleIdError
 from rule_cli.common.custom_exceptions import DuplicateRuleNameError
 from rule_cli.common.custom_exceptions import RuleConfigError
 from rule_cli.common.custom_exceptions import RuleError
+from rule_cli.common.pathconfig import ROOT_DIR, CONFIG_DIR
 import yaml
 
 LOGGER = logging.getLogger()
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
-CONFIG_DIR = ROOT_DIR / "config"
 RULES_DIR = ROOT_DIR / "rules"
 RULE_CONFIG_FILE = CONFIG_DIR / "rule_config.yaml"
 
