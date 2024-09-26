@@ -53,13 +53,11 @@ jobs:
         #working-directory: ./tools/rule_manager
         #run: python -m black chronicle_api rule_cli --line-length 120 --check
    
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2 
+      #- name: Set up Cloud SDK
+      #  uses: google-github-actions/setup-gcloud@v2 
         
       - name: Testing Workload Identity Federation Config
-        run: |
-          gcloud auth print-identity-token
-          gcloud projects list
+        run: gcloud projects list
           
       - name: Run tests using pytest
         working-directory: ./tools/rule_manager
