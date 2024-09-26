@@ -58,5 +58,5 @@ def initialize_http_session(
       info=chronicle_api_credentials, scopes=scopes or AUTHORIZATION_SCOPES
   )
   """
-  credentials = Credentials.from_info(key)
+  credentials = Credentials.from_info(info=key, scopes=scopes or AUTHORIZATION_SCOPES)
   return requests.AuthorizedSession(credentials)
