@@ -26,12 +26,17 @@ https://requests.readthedocs.io
 """
 
 from typing import List
+import json
+import os
 
 from google.auth.transport import requests
 from google.oauth2 import service_account
+from google.auth.identity_pool import Credentials
 
 AUTHORIZATION_SCOPES = ["https://www.googleapis.com/auth/cloud-platform"]
 
+f = open(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
+key = json.load(f)
 
 def initialize_http_session(
     chronicle_api_credentials: str, scopes: List[str] | None = None
@@ -48,8 +53,10 @@ def initialize_http_session(
   Returns:
       HTTP session object to send authorized requests and receive responses.
   """
+  """
   credentials = service_account.Credentials.from_service_account_info(
       info=chronicle_api_credentials, scopes=scopes or AUTHORIZATION_SCOPES
   )
-
+  """
+  credentials = Credentials.from_info(info=key, scopes=scopes or AUTHORIZATION_SCOPES)
   return requests.AuthorizedSession(credentials)

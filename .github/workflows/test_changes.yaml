@@ -1,0 +1,55 @@
+# Run unit tests and verify YARA-L rules using Google SecOps' API.
+
+name: Run Tests
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: write
+
+  # workflow_dispatch allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    
+    env:
+      LOGGING_LEVEL: ${{ vars.LOGGING_LEVEL }}
+      CHRONICLE_API_BASE_URL: ${{ vars.CHRONICLE_API_BASE_URL }}
+      CHRONICLE_INSTANCE: ${{ vars.CHRONICLE_INSTANCE }}
+      AUTHORIZATION_SCOPES: ${{ vars.AUTHORIZATION_SCOPES }}
+      CHRONICLE_API_CREDENTIALS: '{ "used": false}'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"  # Caching pip dependencies
+
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Install Python project dependencies
+        working-directory: ./tools/rule_manager
+        run: pip install -r requirements_dev.txt
+
+      - name: Run tests using pytest
+        working-directory: ./tools/rule_manager
+        run: pytest -v
+
+      - name: Verify YARA-L rules
+        working-directory: ./tools/rule_manager
+        # Verify that all rules are valid YARA-L 2.0 rules via Google SecOps' API
+        run: python -m rule_cli --verify-rules

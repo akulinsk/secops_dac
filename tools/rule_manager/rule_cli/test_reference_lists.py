@@ -26,7 +26,7 @@ from rule_cli.reference_lists import ReferenceList
 from rule_cli.reference_lists import ReferenceListConfigEntry
 from rule_cli.reference_lists import ReferenceLists
 
-ROOT_DIR = pathlib.Path(__file__).parent.parent
+ROOT_DIR = pathlib.Path(__file__).parent.parent.parent.parent
 REF_LISTS_DIR = ROOT_DIR / "reference_lists"
 TEST_DATA_DIR = pathlib.Path(__file__).parent / "test_data"
 TEST_REF_LISTS_DIR = TEST_DATA_DIR / "reference_lists"
