@@ -1,7 +1,0 @@
-example_list_1:
-  description: Description for example reference list 1
-  resource_name: projects/chronicle-secops-433408/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/referenceLists/example_list_1
-  revision_create_time: '2024-09-30T11:29:32.379215Z'
-  rule_associations_count: null
-  rules: null
-  syntax_type: REFERENCE_LIST_SYNTAX_TYPE_PLAIN_TEXT_STRING
