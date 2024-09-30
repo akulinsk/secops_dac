@@ -44,7 +44,7 @@ jobs:
         with:
           token_format: 'access_token'
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+          #service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Install Python project dependencies
         working-directory: ./tools/rule_manager
