@@ -62,7 +62,6 @@ jobs:
       # After any changes are made to rules and reference lists in Google SecOps, the latest rules and reference lists are retrieved to update the main branch with the latest data (revision_id, revision_create_time, etc).
 
       - name: Add files to git staging area
-        working-directory: ./tools/rule_manager
         run: git add rules config/rule_config.yaml reference_lists config/reference_list_config.yaml
 
       - name: Run git status command
