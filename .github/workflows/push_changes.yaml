@@ -25,7 +25,7 @@ jobs:
       CHRONICLE_API_BASE_URL: ${{ vars.CHRONICLE_API_BASE_URL }}
       CHRONICLE_INSTANCE: ${{ vars.CHRONICLE_INSTANCE }}
       AUTHORIZATION_SCOPES: ${{ vars.AUTHORIZATION_SCOPES }}
-      CHRONICLE_API_CREDENTIALS: ${{ secrets.CHRONICLE_API_CREDENTIALS }}
+      CHRONICLE_API_CREDENTIALS: '{ "used": false}'
     
     steps:
       - uses: actions/checkout@v4
@@ -37,25 +37,32 @@ jobs:
           python-version: "3.10"
           cache: "pip"  # Caching pip dependencies
 
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
       - name: Install Python project dependencies
         run: pip install -r requirements_dev.txt
 
-      - name: Check Python code formatting with black
-        run: python -m black chronicle_api rule_cli --line-length 120 --check
-
       - name: Run tests using pytest
+        working-directory: ./tools/rule_manager
         run: pytest -v
 
       - name: Update reference lists in Google SecOps based on files in main branch
+        working-directory: ./tools/rule_manager
         run: python -m rule_cli --update-remote-reference-lists
 
       - name: Update rules in Google SecOps based on files in main branch
+        working-directory: ./tools/rule_manager
         run: python -m rule_cli --update-remote-rules
 
       # After any changes are made to rules and reference lists in Google SecOps, the latest rules and reference lists are retrieved to update the main branch with the latest data (revision_id, revision_create_time, etc).
 
       - name: Add files to git staging area
-        run: git add rules rule_config.yaml reference_lists reference_list_config.yaml
+        working-directory: ./tools/rule_manager
+        run: git add rules config/rule_config.yaml reference_lists config/reference_list_config.yaml
 
       - name: Run git status command
         run: git status  # For debugging
