@@ -4,11 +4,11 @@ name: Pull Latest Content
 
 on:
   workflow_dispatch:
-    inputs:
-     environment:
-        type: environment
-        description: Select the environmen
-        default: default
+#    inputs:
+#     environment:
+#        type: environment
+#        description: Select the environmen
+#        default: default
 #on:
   #schedule:
   # Run daily at 23:05 UTC time
