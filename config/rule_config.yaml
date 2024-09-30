@@ -1,3 +1,27 @@
+firewall_rules_modified_or_deleted:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-09-30T11:29:34.090383Z'
+  enabled: true
+  id: ru_77c365b0-766a-4909-b297-008b896f4e0f
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_77c365b0-766a-4909-b297-008b896f4e0f
+  revision_create_time: '2024-09-30T11:29:34.090383Z'
+  revision_id: v_1727695774_090383000
+  run_frequency: HOURLY
+  type: SINGLE_EVENT
+gcp_admin_privileged_roles_added_to_service_accounts:
+  alerting: false
+  archive_time: null
+  archived: false
+  create_time: '2024-09-30T11:38:45.521439Z'
+  enabled: false
+  id: ru_14ef38ff-e321-4d20-8d53-c57d7d844014
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_14ef38ff-e321-4d20-8d53-c57d7d844014
+  revision_create_time: '2024-09-30T11:38:45.521439Z'
+  revision_id: v_1727696325_521439000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 permissions_granted_over_SA:
   alerting: true
   archive_time: null
@@ -10,9 +34,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-firewall_rules_modified_or_deleted:
-  alerting: true
-  enabled: true
-gcp_admin_privileged_roles_added_to_service_accounts:
-  alerting: true
-  enabled: true
