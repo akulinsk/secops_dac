@@ -42,8 +42,7 @@ jobs:
           cache: "pip"  # Caching pip dependencies
       - uses: 'google-github-actions/auth@v2'
         with:
-          token_format: 'access_token'
-          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+          project_id: ${{ secrets.GCP_PROJECT }}
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           #service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
