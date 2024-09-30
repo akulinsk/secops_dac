@@ -34,3 +34,6 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
+gcp_multiple_service_apis_disabled:
+  enabled: true
+  alerting: true
