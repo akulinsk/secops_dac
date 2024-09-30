@@ -44,6 +44,7 @@ jobs:
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Install Python project dependencies
+        working-directory: ./tools/rule_manager
         run: pip install -r requirements_dev.txt
 
       - name: Run tests using pytest
