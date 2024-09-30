@@ -29,6 +29,7 @@ jobs:
       CHRONICLE_API_BASE_URL: ${{ vars.CHRONICLE_API_BASE_URL }}
       CHRONICLE_INSTANCE: ${{ vars.CHRONICLE_INSTANCE }}
       AUTHORIZATION_SCOPES: ${{ vars.AUTHORIZATION_SCOPES }}
+      CHRONICLE_API_CREDENTIALS: ""
 
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +45,7 @@ jobs:
           token_format: 'access_token'
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-          
+
       - name: Install Python project dependencies
         working-directory: ./tools/rule_manager
         run: pip install -r requirements_dev.txt
