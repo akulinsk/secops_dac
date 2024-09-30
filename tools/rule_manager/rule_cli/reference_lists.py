@@ -318,7 +318,7 @@ class ReferenceLists:
           exclude={"name"}
       )
 
-    ref_list_config_file_path = ROOT_DIR / "reference_list_config.yaml"
+    ref_list_config_file_path = REF_LIST_CONFIG_FILE
 
     LOGGER.info(
         "Writing reference list config to %s", ref_list_config_file_path

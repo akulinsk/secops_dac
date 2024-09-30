@@ -325,7 +325,7 @@ class Rules:
           exclude={"name"}
       )
 
-    rule_config_file_path = ROOT_DIR / "rule_config.yaml"
+    rule_config_file_path = RULE_CONFIG_FILE
 
     LOGGER.info("Writing rule config to %s", rule_config_file_path)
     with open(rule_config_file_path, "w", encoding="utf-8") as rule_config_file:
