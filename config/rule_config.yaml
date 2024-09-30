@@ -13,3 +13,6 @@ permissions_granted_over_SA:
 firewall_rules_modified_or_deleted:
   alerting: true
   enabled: true
+gcp_admin_privileged_roles_added_to_service_accounts:
+  alerting: true
+  enabled: true
