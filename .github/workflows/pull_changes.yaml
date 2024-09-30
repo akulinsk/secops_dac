@@ -43,7 +43,7 @@ jobs:
       - uses: 'google-github-actions/auth@v2'
         with:
           token_format: 'access_token'
-          project_id: ${{ secrets.GCP_PROJECT }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           #service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
