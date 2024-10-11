@@ -4,11 +4,11 @@ name: Pull Latest Content
 
 on:
   workflow_dispatch:
-    inputs:
-     environment:
-        type: environment
-        description: Select the environmen
-        default: default
+#    inputs:
+#     environment:
+#        type: environment
+#        description: Select the environmen
+#        default: default
 #on:
   #schedule:
   # Run daily at 23:05 UTC time
@@ -42,9 +42,9 @@ jobs:
           cache: "pip"  # Caching pip dependencies
       - uses: 'google-github-actions/auth@v2'
         with:
-          token_format: 'access_token'
+          project_id: ${{ secrets.GCP_PROJECT }}
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+          #service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Install Python project dependencies
         working-directory: ./tools/rule_manager
@@ -54,11 +54,11 @@ jobs:
         #working-directory: ./tools/rule_manager
         #run: python -m black chronicle_api rule_cli --line-length 120 --check
    
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2 
+      #- name: Set up Cloud SDK
+      #  uses: google-github-actions/setup-gcloud@v2 
         
-      - name: Testing Workload Identity Federation Config
-        run: gcloud auth list
+      #- name: Testing Workload Identity Federation Config
+      #  run: gcloud auth list
           
       - name: Run tests using pytest
         working-directory: ./tools/rule_manager

@@ -11,6 +11,18 @@ firewall_rules_modified_or_deleted:
   run_frequency: HOURLY
   type: SINGLE_EVENT
 gcp_admin_privileged_roles_added_to_service_accounts:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-11T10:26:14.420143Z'
+  enabled: true
+  id: ru_474e4732-5c35-4b59-b57a-e7051ebd52a7
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_474e4732-5c35-4b59-b57a-e7051ebd52a7
+  revision_create_time: '2024-10-11T10:26:14.420143Z'
+  revision_id: v_1728642374_420143000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
+gcp_admin_privileged_roles_added_to_service_accounts_2:
   alerting: false
   archive_time: null
   archived: false
@@ -18,10 +30,34 @@ gcp_admin_privileged_roles_added_to_service_accounts:
   enabled: false
   id: ru_14ef38ff-e321-4d20-8d53-c57d7d844014
   resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_14ef38ff-e321-4d20-8d53-c57d7d844014
-  revision_create_time: '2024-09-30T11:38:45.521439Z'
-  revision_id: v_1727696325_521439000
+  revision_create_time: '2024-10-11T10:30:40.664607Z'
+  revision_id: v_1728642640_664607000
   run_frequency: LIVE
   type: SINGLE_EVENT
+gcp_multiple_service_apis_disabled:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-09-30T13:16:21.284687Z'
+  enabled: true
+  id: ru_531ea4d5-3733-4c75-9e5e-25dea735d099
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_531ea4d5-3733-4c75-9e5e-25dea735d099
+  revision_create_time: '2024-09-30T13:16:21.284687Z'
+  revision_id: v_1727702181_284687000
+  run_frequency: HOURLY
+  type: MULTI_EVENT
+gcp_successful_api_from_tor_exit_node:
+  alerting: false
+  archive_time: null
+  archived: false
+  create_time: '2024-10-11T10:40:59.056767Z'
+  enabled: false
+  id: ru_2b569fe1-2c2b-4e67-b8a3-3c08c6d065cd
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_2b569fe1-2c2b-4e67-b8a3-3c08c6d065cd
+  revision_create_time: '2024-10-11T10:40:59.056767Z'
+  revision_id: v_1728643259_056767000
+  run_frequency: LIVE
+  type: MULTI_EVENT
 permissions_granted_over_SA:
   alerting: true
   archive_time: null
@@ -34,6 +70,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-gcp_multiple_service_apis_disabled:
-  enabled: true
-  alerting: true
