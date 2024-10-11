@@ -58,6 +58,18 @@ gcp_successful_api_from_tor_exit_node:
   revision_id: v_1728643259_056767000
   run_frequency: LIVE
   type: MULTI_EVENT
+github_application_installed:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-11T11:16:30.858319Z'
+  enabled: true
+  id: ru_d972cc61-fcb0-42a8-ad0f-cc2486f829d3
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_d972cc61-fcb0-42a8-ad0f-cc2486f829d3
+  revision_create_time: '2024-10-11T11:16:30.858319Z'
+  revision_id: v_1728645390_858319000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 permissions_granted_over_SA:
   alerting: true
   archive_time: null
@@ -70,6 +82,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-github_application_installed:
-  alerting: true
-  enabled: true
