@@ -33,6 +33,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -51,11 +54,11 @@ jobs:
         #working-directory: ./tools/rule_manager
         #run: python -m black chronicle_api rule_cli --line-length 120 --check
    
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2 
+      #- name: Set up Cloud SDK
+      #  uses: google-github-actions/setup-gcloud@v2 
         
-      - name: Testing Workload Identity Federation Config
-        run: gcloud auth list
+      #- name: Testing Workload Identity Federation Config
+      #  run: gcloud auth list
           
       - name: Run tests using pytest
         working-directory: ./tools/rule_manager
