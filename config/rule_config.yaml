@@ -118,6 +118,6 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-  gcp_firewall_rule_opened_to_world:
-    alerting: true
-    enabled: true
+gcp_firewall_rule_opened_to_world:
+  alerting: true
+  enabled: true
