@@ -34,6 +34,18 @@ gcp_admin_privileged_roles_added_to_service_accounts_2:
   revision_id: v_1728642640_664607000
   run_frequency: LIVE
   type: SINGLE_EVENT
+gcp_bigquery_results_downloaded_from_multiple_tables:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-15T10:07:34.828175Z'
+  enabled: true
+  id: ru_253b3684-9e36-4b27-adaa-2850ef3f4207
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_253b3684-9e36-4b27-adaa-2850ef3f4207
+  revision_create_time: '2024-10-15T10:08:33.614943Z'
+  revision_id: v_1728986913_614943000
+  run_frequency: HOURLY
+  type: MULTI_EVENT
 gcp_multiple_kms_keys_disabled_or_destroyed:
   alerting: true
   archive_time: null
