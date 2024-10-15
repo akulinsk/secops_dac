@@ -34,6 +34,18 @@ gcp_admin_privileged_roles_added_to_service_accounts_2:
   revision_id: v_1728642640_664607000
   run_frequency: LIVE
   type: SINGLE_EVENT
+gcp_multiple_kms_keys_disabled_or_destroyed:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-15T09:47:56.614031Z'
+  enabled: true
+  id: ru_a3239a7e-68f5-4046-befb-692144394ac1
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_a3239a7e-68f5-4046-befb-692144394ac1
+  revision_create_time: '2024-10-15T09:47:56.614031Z'
+  revision_id: v_1728985676_614031000
+  run_frequency: HOURLY
+  type: MULTI_EVENT
 gcp_multiple_service_apis_disabled:
   alerting: true
   archive_time: null
@@ -94,6 +106,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-gcp_multiple_kms_keys_disabled_or_destroyed:
-  alerting: true
-  enabled: true
