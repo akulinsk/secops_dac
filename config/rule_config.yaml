@@ -46,6 +46,18 @@ gcp_multiple_service_apis_disabled:
   revision_id: v_1727702181_284687000
   run_frequency: HOURLY
   type: MULTI_EVENT
+gcp_storage_bucket_opened_to_public:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-15T09:38:40.475695Z'
+  enabled: true
+  id: ru_cfd26b06-a644-4b45-b52e-293551c954df
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_cfd26b06-a644-4b45-b52e-293551c954df
+  revision_create_time: '2024-10-15T09:39:31.092479Z'
+  revision_id: v_1728985171_092479000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 gcp_successful_api_from_tor_exit_node:
   alerting: false
   archive_time: null
@@ -66,8 +78,8 @@ github_application_installed:
   enabled: true
   id: ru_d972cc61-fcb0-42a8-ad0f-cc2486f829d3
   resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_d972cc61-fcb0-42a8-ad0f-cc2486f829d3
-  revision_create_time: '2024-10-11T11:16:30.858319Z'
-  revision_id: v_1728645390_858319000
+  revision_create_time: '2024-10-11T11:22:00.725967Z'
+  revision_id: v_1728645720_725967000
   run_frequency: LIVE
   type: SINGLE_EVENT
 permissions_granted_over_SA:
