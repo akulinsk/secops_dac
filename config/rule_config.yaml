@@ -130,6 +130,18 @@ github_application_installed:
   revision_id: v_1728645720_725967000
   run_frequency: LIVE
   type: SINGLE_EVENT
+google_workspace_admin_role_assignment:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-16T12:08:08.005631Z'
+  enabled: true
+  id: ru_bec9c100-4ab5-4e2b-8586-363ec102d541
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_bec9c100-4ab5-4e2b-8586-363ec102d541
+  revision_create_time: '2024-10-16T12:08:08.005631Z'
+  revision_id: v_1729080488_005631000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 permissions_granted_over_SA:
   alerting: true
   archive_time: null
@@ -142,6 +154,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-google_workspace_admin_role_assignment:
-  alerting: true
-  enabled: true
