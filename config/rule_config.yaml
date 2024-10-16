@@ -1,3 +1,15 @@
+chrome_browser_safe_browsing_user_bypass:
+  alerting: false
+  archive_time: null
+  archived: false
+  create_time: '2024-10-16T11:59:35.238879Z'
+  enabled: true
+  id: ru_bf04bb05-c7b1-4747-a0d4-650af0fc2e93
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_bf04bb05-c7b1-4747-a0d4-650af0fc2e93
+  revision_create_time: '2024-10-16T11:59:35.238879Z'
+  revision_id: v_1729079975_238879000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 firewall_rules_modified_or_deleted:
   alerting: true
   archive_time: null
