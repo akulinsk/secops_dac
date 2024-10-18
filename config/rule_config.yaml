@@ -142,6 +142,18 @@ google_workspace_admin_role_assignment:
   revision_id: v_1729080488_005631000
   run_frequency: LIVE
   type: SINGLE_EVENT
+high_risk_user_download_executable_from_macro:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-10-18T14:59:23.850319Z'
+  enabled: true
+  id: ru_cf4d0cbc-36c8-40ae-b2d2-b21a85f9b245
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_cf4d0cbc-36c8-40ae-b2d2-b21a85f9b245
+  revision_create_time: '2024-10-18T14:59:23.850319Z'
+  revision_id: v_1729263563_850319000
+  run_frequency: LIVE
+  type: MULTI_EVENT
 permissions_granted_over_SA:
   alerting: true
   archive_time: null
