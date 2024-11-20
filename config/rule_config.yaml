@@ -1966,3 +1966,6 @@ wmic_ntds_dit_T1003_003_cisa_report:
   revision_id: v_1731502277_285055000
   run_frequency: LIVE
   type: SINGLE_EVENT
+rule_made_for_fun:
+  alerting: true
+  enabled: false
