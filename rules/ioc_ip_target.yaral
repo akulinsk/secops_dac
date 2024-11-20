@@ -1,26 +1,35 @@
-rule network_traffic_to_specific_country {
+rule ioc_ip_target {
 
   meta:
     author = "Google Cloud Security"
-    description = "Identify network traffic based on target country"
+    description = "Detect network events that indicate communication to a watchlisted IP address"
     type = "alert"
-    tags = "geoip enrichment"
+    tags = "threat indicators"
+    assumption = "Assumes MISP data has been ingested into entity graph; this rule can be modified to utilize other TI indicators"
     data_source = "microsoft windows events"
-    severity = "Low"
-    priority = "Low"
+    severity = "Medium"
+    priority = "Medium"
 
   events:
     $network.metadata.base_labels.namespaces = "LogStory"
     $network.metadata.event_type = "NETWORK_CONNECTION"
-    //Specify a country of interest to monitor or add additional countries using an or statement
-    $network.target.ip_geo_artifact.location.country_or_region = "France" nocase
     $network.target.ip = $ip
+    //Target IP is not part of RFC1918 space, can modify as needed
+    not net.ip_in_range_cidr($network.target.ip, "10.0.0.0/24")
+    not net.ip_in_range_cidr($network.target.ip, "172.16.0.0/12")
+    not net.ip_in_range_cidr($network.target.ip, "192.168.0.0/16")
+ 
+    // Correlates with MISP data; can be modified based on your MISP parser or other TI
+    $ioc.graph.metadata.product_name = "MISP"
+    $ioc.graph.metadata.entity_type = "IP_ADDRESS"
+    $ioc.graph.metadata.source_type = "ENTITY_CONTEXT"
+    $ioc.graph.entity.ip = $ip
 
   match:
-    $ip over 30m
- 
+    $ip over 5m
+
   outcome:
-    $risk_score = max(35)
+    $risk_score = max(65)
     $event_count = count_distinct($network.metadata.id)
     // added to populate alert graph with additional context
     $principal_ip = array_distinct($network.principal.ip)
@@ -42,5 +51,5 @@ rule network_traffic_to_specific_country {
     $target_user_userid = array_distinct($network.target.user.userid)
 
   condition:
-    $network
+    $network and $ioc
 }

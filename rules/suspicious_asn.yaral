@@ -1,8 +1,8 @@
-rule network_traffic_to_specific_country {
+rule suspicious_asn {
 
   meta:
     author = "Google Cloud Security"
-    description = "Identify network traffic based on target country"
+    description = "Identify network traffic based on a specific ASN"
     type = "alert"
     tags = "geoip enrichment"
     data_source = "microsoft windows events"
@@ -12,8 +12,8 @@ rule network_traffic_to_specific_country {
   events:
     $network.metadata.base_labels.namespaces = "LogStory"
     $network.metadata.event_type = "NETWORK_CONNECTION"
-    //Specify a country of interest to monitor or add additional countries using an or statement
-    $network.target.ip_geo_artifact.location.country_or_region = "France" nocase
+    //Specify an autonomoous system number to monitor or add additional ASNs using an or statement
+    $network.target.ip_geo_artifact.network.asn = "12741"
     $network.target.ip = $ip
 
   match:

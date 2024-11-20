@@ -1,28 +1,39 @@
-rule network_traffic_to_specific_country {
+rule network_connection_first_seen_in_past_day {
 
   meta:
     author = "Google Cloud Security"
-    description = "Identify network traffic based on target country"
+    description = "Detect network connection to an ip address that was only seen for the first time in the past 24 hours"
     type = "alert"
-    tags = "geoip enrichment"
-    data_source = "microsoft windows events"
+    tags = "first last seen"
+    data_source = "microsoft windows , gcp firewall, microsoft sysmon, crowdstrike, gcp scc, zeek"
     severity = "Low"
     priority = "Low"
 
   events:
     $network.metadata.base_labels.namespaces = "LogStory"
     $network.metadata.event_type = "NETWORK_CONNECTION"
-    //Specify a country of interest to monitor or add additional countries using an or statement
-    $network.target.ip_geo_artifact.location.country_or_region = "France" nocase
     $network.target.ip = $ip
+    //Target IP is not part of RFC1918 space, can modify as needed
+    not net.ip_in_range_cidr ($network.target.ip, "10.0.0.0/24") 
+    not net.ip_in_range_cidr ($network.target.ip, "172.16.0.0/20")
+    not net.ip_in_range_cidr ($network.target.ip, "192.168.0.0/16")
+
+    //derived from events ingested by Chronicle
+    $entity.graph.entity.artifact.ip  = $ip
+    $entity.graph.metadata.entity_type = "IP_ADDRESS"
+    $entity.graph.metadata.source_type = "DERIVED_CONTEXT"  
+    $entity.graph.entity.artifact.first_seen_time.seconds > 0
+   
+    //calculate the different between current time and the first time the ip was listed as seen in the entity graph
+    86400 > timestamp.current_seconds() - $entity.graph.entity.artifact.first_seen_time.seconds
 
   match:
-    $ip over 30m
- 
+    $ip over 24h
+
   outcome:
     $risk_score = max(35)
     $event_count = count_distinct($network.metadata.id)
-    // added to populate alert graph with additional context
+    //added to populate alert graph with additional context
     $principal_ip = array_distinct($network.principal.ip)
     // Commented out target.ip because it is already represented in graph as match variable. If match changes, can uncomment to add to results
     //$target_ip = array_distinct($network.target.ip)
@@ -42,5 +53,5 @@ rule network_traffic_to_specific_country {
     $target_user_userid = array_distinct($network.target.user.userid)
 
   condition:
-    $network
+    $network and $entity
 }

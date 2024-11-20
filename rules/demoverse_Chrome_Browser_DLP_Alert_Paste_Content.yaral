@@ -1,0 +1,31 @@
+rule demoverse_Chrome_Browser_DLP_Alert_Paste_Content {
+  meta:
+    author = "GK"
+    description = "Reports pastes of sensitive data to unauthorized sites "
+    severity = "High"
+
+  events:
+    $security.metadata.product_name = "Chrome Management" 
+    $security.metadata.product_event_type = "sensitiveDataEvent"
+    $security.security_result.about.labels.value = "WEB_CONTENT_UPLOAD"
+    $security.security_result.rule_name != ""
+    $security.principal.user.email_addresses = $userid
+    $security.security_result.about.labels.value = $direction
+    $security.target.url = $url
+    $security.target.file.full_path = "Text data"
+
+  match:
+      $userid over 2m
+
+  outcome:
+    $tlp = array_distinct("amber")
+    $target_url = array_distinct($url)
+    $Local_file = array_distinct($security.target.file.full_path)
+    $Action = array_distinct($direction)
+    $host = array_distinct($security.principal.hostname)
+    $machine_local_user = array_distinct($security.target.user.userid)
+    $risk_score = max(50)
+
+  condition:
+    $security
+}

@@ -1,0 +1,30 @@
+rule demoverse_Chrome_Browser_Alert_SideLoaded_Extensions {
+  // This rule looks for extensions "side-loaded", or loaded directly from disk rather than the web store
+
+  meta:
+    author = "Sam Eagle"
+    description = "Looks for Extensions loaded into Chrome outside of the Web store"
+    severity = "High"
+
+  events:
+    $event.metadata.log_type = "CHROME_MANAGEMENT"
+    $event.metadata.product_event_type = "browserExtensionInstallEvent"
+    $event.principal.hostname = $hostname
+    $event.principal.user.email_addresses = $user
+    $event.target.resource.attribute.labels["extension_source"] = "EXTERNAL"
+    $event.target.resource.attribute.labels["extension_action"] = "INSTALL"
+    $event.target.user.userid = $local_user
+
+  match:
+    $user over 2m
+
+  outcome:
+    $risk_score = 75
+    $Host = array_distinct($hostname)
+    $Userid = array_distinct($user)
+    $LocalUserID = array_distinct($local_user)
+
+
+  condition:
+    $event
+}
