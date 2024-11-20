@@ -1690,6 +1690,18 @@ recon_suspicious_commands_cisa_report:
   revision_id: v_1731502416_330015000
   run_frequency: LIVE
   type: MULTI_EVENT
+rule_for_soapbox_1:
+  alerting: true
+  archive_time: null
+  archived: false
+  create_time: '2024-11-20T14:34:23.644127Z'
+  enabled: false
+  id: ru_3eee5041-3a23-47cc-8a9c-096850debf6d
+  resource_name: projects/112611561358/locations/us/instances/960a2f65-4940-4cc4-b6c2-ca605f9a2a4c/rules/ru_3eee5041-3a23-47cc-8a9c-096850debf6d
+  revision_create_time: '2024-11-20T14:34:23.644127Z'
+  revision_id: v_1732113263_644127000
+  run_frequency: LIVE
+  type: SINGLE_EVENT
 rule_made_for_fun_1:
   alerting: true
   archive_time: null
@@ -1978,6 +1990,3 @@ wmic_ntds_dit_T1003_003_cisa_report:
   revision_id: v_1731502277_285055000
   run_frequency: LIVE
   type: SINGLE_EVENT
-rule_for_soapbox_1:
-  alerting: true
-  enabled: false
