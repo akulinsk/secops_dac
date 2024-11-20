@@ -166,6 +166,3 @@ permissions_granted_over_SA:
   revision_id: v_1727186394_928287000
   run_frequency: LIVE
   type: SINGLE_EVENT
-rule network_traffic_to_specific_country:
-  alerting: true
-  enabled: true
