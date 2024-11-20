@@ -1,24 +1,30 @@
-rule network_traffic_to_specific_country {
+rule ip_target_prevalence {
 
   meta:
     author = "Google Cloud Security"
-    description = "Identify network traffic based on target country"
+    description = "Detect events that are communicating to IP addresses that have a low rolling max prevalence."
     type = "alert"
-    tags = "geoip enrichment"
-    data_source = "microsoft windows events"
+    tags = "prevalence"
+    data_source = "crowdstrike, gcp firewall, microsoft sysmon, gcp scc, microsoft defender atp, corelight zeek, microsoft windows events"
     severity = "Low"
     priority = "Low"
 
   events:
     $network.metadata.base_labels.namespaces = "LogStory"
     $network.metadata.event_type = "NETWORK_CONNECTION"
-    //Specify a country of interest to monitor or add additional countries using an or statement
-    $network.target.ip_geo_artifact.location.country_or_region = "France" nocase
     $network.target.ip = $ip
 
+    // derived from events ingested by Chronicle
+    $prevalence.graph.metadata.entity_type = "IP_ADDRESS"
+    $prevalence.graph.metadata.source_type = "DERIVED_CONTEXT"
+    $prevalence.graph.entity.artifact.prevalence.day_count = 10
+    $prevalence.graph.entity.artifact.prevalence.rolling_max <= 3
+    $prevalence.graph.entity.artifact.prevalence.rolling_max > 0
+    $prevalence.graph.entity.artifact.ip = $ip
+
   match:
-    $ip over 30m
- 
+    $ip over 5m
+
   outcome:
     $risk_score = max(35)
     $event_count = count_distinct($network.metadata.id)
@@ -40,7 +46,7 @@ rule network_traffic_to_specific_country {
     $target_process_parent_process_product_specfic_process_id = array_distinct($network.target.process.parent_process.product_specific_process_id)
     $principal_user_userid = array_distinct($network.principal.user.userid)
     $target_user_userid = array_distinct($network.target.user.userid)
-
+ 
   condition:
-    $network
+    $network and $prevalence
 }

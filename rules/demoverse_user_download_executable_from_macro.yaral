@@ -1,0 +1,43 @@
+rule demoverse_user_download_executable_from_macro {
+  
+  meta:
+    author = "Google Cloud Security"
+    description = "Executable downloaded by Microsoft Excel by user with GCP entity relationship"
+    type = "alert"
+    data_source = "zscaler nss, crowdstrike"
+    tags = "user entity, resource entity"
+    severity = "High"
+    priority = "High"
+    platform = "Windows"
+    assumption = "This rule assumes that GCP DLP has been deployed and resources have been assigned to a user context"
+    mitre_attack_tactic = "Execution"
+    mitre_attack_technique = "User Execution: Malicious File"
+    mitre_attack_url = "https://attack.mitre.org/techniques/T1204/002/"
+    mitre_attack_version = "v13.1"
+
+  events:
+    // proxy event with suspected executable download
+    $proxy_event.metadata.event_type = "NETWORK_HTTP"
+    $proxy_event.target.url =  /.*\.exe$/ or
+    $proxy_event.network.received_bytes > 102400
+    $proxy_event.principal.user.userid = $user
+    $proxy_event.principal.user.userid != /test/
+
+    // correlate with EDR event indicating Excel activity
+    $edr_event.target.user.userid  = $user
+    $edr_event.principal.process.file.full_path = /excel/ nocase
+    $edr_event.metadata.event_type = "PROCESS_LAUNCH"
+   
+    //first hop into entity graph to find the permissions
+    $user_entity.graph.entity.user.userid = $user
+    $user_entity.graph.metadata.entity_type = "USER"
+    $user_entity.graph.metadata.source_type != "DERIVED_CONTEXT"
+    
+
+
+  match:
+    $user over 5m
+
+  condition:
+    $proxy_event and $edr_event and $user_entity
+}

@@ -1,0 +1,81 @@
+rule demoverse_suspicious_auth_unusual_interval_time {
+
+    meta:
+        author = "@cmmartin"
+        description = "Generates a detection for authentication activity occuring between two locations in an unusual interval of time."
+        severity = "LOW"
+        priority = "LOW"
+
+    events:
+        $e1.metadata.log_type = "WORKSPACE_ACTIVITY"
+        $e1.metadata.event_type = "USER_LOGIN"
+        $e1.metadata.product_event_type = "login_success"
+        
+        // match variables
+        $user = $e1.security_result.about.email
+        $e1_lat = $e1.principal.location.region_coordinates.latitude
+        $e1_long = $e1.principal.location.region_coordinates.longitude
+
+        // ensure consistent event sequencing, i.e., $e1 is before $e2
+        $e1.metadata.event_timestamp.seconds < $e2.metadata.event_timestamp.seconds
+        // check the $e1 and $e2 coordinates represent different locations
+        $e1_lat != $e2_lat
+        $e1_long != $e2_long
+
+        $e2.metadata.log_type = "WORKSPACE_ACTIVITY"
+        $e2.metadata.event_type = "USER_LOGIN"    
+        $e2.metadata.product_event_type = "login_success"
+        // match variables
+        $user = $e2.security_result.about.email
+        $e2_lat = $e2.principal.location.region_coordinates.latitude
+        $e2_long = $e2.principal.location.region_coordinates.longitude
+    
+    match:
+        $user, 
+        $e1_lat, 
+        $e1_long, 
+        $e2_lat, 
+        $e2_long 
+        over 4h
+    
+    outcome:
+        // calculate the interval between first and last event, in seconds
+        $duration_hours = cast.as_int(
+            min(
+                ($e2.metadata.event_timestamp.seconds - $e1.metadata.event_timestamp.seconds) 
+                / 3600
+            )
+        )
+
+        // calculate distance between login events, and convert results into kilometers
+        // - math.ceil rounds up a float up to the nearest int
+        $distance_kilometers = math.ceil(
+            max(
+                math.geo_distance(
+                    $e1_long,
+                    $e1_lat,
+                    $e2_long,
+                    $e2_lat
+                )
+            ) 
+            // convert the math.geo_distance result from meters to kilometers
+            / 1000 
+        )
+
+        // calculate the speed in KPH
+        $kph = math.ceil($distance_kilometers / $duration_hours)
+
+        // // generate risk_score based on KPH, i.e., speed over distance travelled
+        $risk_score = (
+            if($kph >= 100 and $kph <= 249, 35) +
+            if($kph > 250 and $kph <= 449, 50) +
+            if($kph > 500 and $kph <= 999, 75) +
+            if($kph >= 1000, 90)
+        ) 
+
+        // change this according to your requirements
+        $risk_score_threshold = 75
+    
+    condition:
+        $e1 and $e2 and $risk_score >= $risk_score_threshold
+}

@@ -1,0 +1,34 @@
+rule demoverse_mandiant_asm_confirmed_cve_alert
+{
+  meta:
+   
+    author = "@swenzel"
+    data_source = "Mandiant Attack Surface Management"
+    description = "Alert matching on high confidence and confirmed CVEs from Attack Surface Management (ASM)"
+    severity = "HIGH"
+
+  events:
+    // Create matching conditions for the event
+    $event.metadata.product_name = "Mandiant Attack Surface Management" 
+    $event.security_result.confidence_details = "confirmed"
+    $event.security_result.confidence = "HIGH_CONFIDENCE"
+    re.regex($event.extensions.vulns.vulnerabilities.cve_id, `CVE`) nocase
+    
+  outcome:
+    // Additional columns and enrichments to be included in the alert
+    $cve = array_distinct($event.principal.asset.vulnerabilities.cve_id)
+    $cvss_score = array_distinct($event.principal.asset.vulnerabilities.cvss_base_score)
+    $vuln_desc = array_distinct($event.principal.asset.vulnerabilities.description)
+    $url = array_distinct($event.principal.url)
+    $security_result = array_distinct($event.security_result.category_details)
+    $org = array_distinct($event.principal.ip_geo_artifact.network.organization_name)
+    $asn = array_distinct($event.principal.ip_geo_artifact.network.asn)
+    $lat = array_distinct($event.principal.location.region_coordinates.latitude)
+    $lon = array_distinct($event.principal.location.region_coordinates.longitude)
+    $desc = array_distinct($event.security_result.description)
+    $summary = array_distinct($event.security_result.summary)
+    $vendor_kb= array_distinct($event.principal.asset.vulnerabilities.vendor_knowledge_base_article_id)
+
+  condition:
+    $event
+}

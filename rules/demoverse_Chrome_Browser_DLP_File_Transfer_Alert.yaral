@@ -1,0 +1,34 @@
+rule demoverse_Chrome_Browser_DLP_File_Transfer_Alert {
+  meta:
+    author = "GK"
+    description = "Reports sensitive data event where a user allowed the event"
+    severity = "Low"
+
+  events:
+    $security.metadata.product_name = "Chrome Management" 
+    $security.metadata.product_event_type = "sensitiveDataEvent"
+    $security.security_result.action_details = "EVENT_RESULT_BLOCKED"
+    $security.security_result.rule_name != ""
+    $security.principal.user.email_addresses = $userid
+    $security.security_result.about.labels.value = $direction
+    $security.target.url = $url
+    $security.target.file.full_path = $local_file
+
+  match:
+      $userid over 5m
+
+  outcome:
+
+    $target_url = array_distinct($url)
+    $file_hash = array_distinct($security.target.file.sha256)
+    $Local_file = array_distinct($local_file)
+    $Action = array_distinct($direction)
+    $risk_score = max(
+      if ($security.security_result.about.labels.value = "", 10) +
+      if ($security.security_result.about.labels.value = "FILE_DOWNLOAD", 25) +
+      if ($security.security_result.about.labels.value = "FILE_UPLOAD", 50)
+    )
+
+  condition:
+    $security
+}
